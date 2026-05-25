@@ -25,45 +25,67 @@ import { SiteHeader } from "@/components/portfolio/site-header";
 
 const experience = [
   {
-    role: "Senior Systems Engineer",
-    company: "TechStack",
-    dates: "2021 - Present",
+    role: "Software Developer",
+    company: "Wilfrid Laurier University - Laurier StartUp Lab",
+    dates: "January 2026 - April 2026",
     summary:
-      "Leading the migration of core legacy systems to distributed microservices while building automation pipelines for AI-assisted release workflows.",
-    tags: ["Rust", "Kubernetes", "Kafka"]
+      "Worked with startup founders to transform ideas into scalable software solutions and technical roadmaps. Supported consulting engagements, innovative AI initiatives, and internal tools while developing workflow automation and enterprise-grade software solutions aligned with university standards and compliance requirements.",
+    tags: ["Microsoft Azure", "React", "Typescript"]
+  },
+   {
+    role: "VP Training Services",
+    company: "Wilfrid Laurier University - Prism Resources",
+    dates: "September 2025 - Present",
+    summary:
+      "Led operations for student training programs serving 3,000+ students across courses in  Finance, AI, coding, Power BI, Excel, Figma, and Google Analytics. Developed a Generative AI course in collaboration with university faculty and used Python to analyze program data and improve delivery.",
+    tags: ["TypeScript", "React", "Node.js"]
   },
   {
-    role: "Full Stack Developer",
-    company: "CloudNine",
-    dates: "2018 - 2021",
+    role: "ServiceNow Technical Writer",
+    company: "Definity Financial Corporation",
+    dates: "May 2025 - August 2025",
     summary:
-      "Designed orchestration tools, API interfaces, and resilient data services for high-traffic B2B infrastructure products.",
+      "Created technical documentation, onboarding guides, and workflow documentation for ServiceNow and RPA systems. Collaborated with technical teams to simplify complex processes for both technical and non-technical audiences.",
     tags: ["TypeScript", "React", "Node.js"]
-  }
+  },
+
+
+
+  {
+    role: "Web Developer",
+    company: "Civiconnect",
+    dates: "September 2024 - December 2024",
+    summary:
+      "Collaborated on full-stack web applications using React, Next.js, and StrapiCMS. Assisted with API testing, integrations, and building reliable user-focused web experiences.",
+    tags: ["TypeScript", "React", "Node.js"]
+  },
+
+  
+  
 ];
 
 const projects = [
   {
-    name: "Core_Data Engine",
+    name: "AI Research Project",
     summary:
-      "High-performance processing library for real-time telemetry streams in distributed environments.",
-    status: "Series B",
+      "Conducted research with a professor on AI-powered curriculum generation using RAG and agentic AI workflows. Designed a platform capable of generating structured courses, lesson plans, assessments, and syllabi for higher education",
+    status: "Academic Research",
     icon: Database
   },
-  {
-    name: "Atlas Cloud Shell",
-    summary:
-      "Container orchestration platform for automated deployment pipelines and microservice monitoring.",
-    status: "Internal",
-    icon: TerminalSquare
-  },
-  {
-    name: "Signal Review",
-    summary:
-      "AI-aided review surface that turns engineering incidents into searchable operational memory.",
-    status: "Prototype",
-    icon: Braces
-  }
+  // {
+  //   name: "Atlas Cloud Shell",
+  //   summary:
+  //     "Container orchestration platform for automated deployment pipelines and microservice monitoring.",
+  //   status: "Internal",
+  //   icon: TerminalSquare
+  // },
+  // {
+  //   name: "Signal Review",
+  //   summary:
+  //     "AI-aided review surface that turns engineering incidents into searchable operational memory.",
+  //   status: "Prototype",
+  //   icon: Braces
+  // }
 ];
 
 const posts = [
@@ -92,20 +114,17 @@ const posts = [
 
 const skills = [
   "TS",
-  "Rust",
-  "Go",
+  "Python",
+  "C",
   "Node.js",
   "React",
   "PostgreSQL",
-  "Redis",
-  "Kafka",
   "AWS",
-  "Kubernetes",
   "Docker",
   "API Design",
-  "High-Performance Compute",
   "Frontend Architecture",
-  "AI Systems"
+  "AI Systems",
+  "Azure"
 ];
 
 export function PortfolioPage() {
@@ -113,7 +132,7 @@ export function PortfolioPage() {
     <main id="home" className="min-h-screen overflow-hidden bg-background technical-grid">
       <SiteHeader />
 
-      <div className="mx-auto w-full max-w-5xl px-5 pt-24 md:px-8 md:pt-32">
+      <div className="mx-auto w-full max-w-4xl px-6 pt-24 md:px-12 md:pt-32">
         <div>
           <HeroSection />
           <AboutSection />
@@ -132,7 +151,7 @@ export function PortfolioPage() {
 function HeroSection() {
   return (
     <section className="grid min-h-[calc(100vh-8rem)] items-center gap-10 pb-24 md:grid-cols-[minmax(220px,0.9fr)_1fr]">
-      <div className="relative order-2 aspect-[4/5] w-full max-w-sm border border-velvet-edge bg-velvet-raised md:order-1">
+      {/* <div className="relative order-2 aspect-[4/5] w-full max-w-sm border border-velvet-edge bg-velvet-raised md:order-1">
         <div className="absolute inset-5 border border-velvet-edge bg-velvet-panel p-4">
           <div className="flex items-center gap-2 border-b border-velvet-edge pb-3">
             <span className="h-2 w-2 rounded-full bg-primary" />
@@ -148,7 +167,7 @@ function HeroSection() {
           </div>
           <div className="absolute inset-x-5 top-16 h-16 animate-scan-line border-y border-primary/50 bg-primary/10" />
         </div>
-      </div>
+      </div> */}
 
       <div className="order-1 max-w-xl animate-fade-up md:order-2">
         <Badge variant="accent" className="mb-5">
@@ -188,13 +207,12 @@ function AboutSection() {
   return (
     <section id="about" className="section-rule py-20">
       <SectionHeading eyebrow="01" title="About" />
-      <div className="grid gap-5 md:grid-cols-[1fr_0.9fr]">
+      <div className="grid gap-5 ">
         <p className="text-lg leading-8 text-foreground/80">
-          I build durable systems for teams that need clarity under load:
-          clean service boundaries, thoughtful interfaces, and tooling that
-          keeps engineering work observable.
+         I’m a Software Developer passionate about building impactful technology through software development, AI, and data-driven solutions. I enjoy creating tools that improve learning, productivity, and community experiences, while also supporting educational and startup initiatives through leadership, collaboration, and technology.
+
         </p>
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Server className="h-5 w-5 text-primary" />
@@ -207,7 +225,7 @@ function AboutSection() {
               response, developer operations, and product-facing workflows.
             </CardDescription>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </section>
   );
@@ -308,9 +326,9 @@ function SkillsSection() {
             </CardTitle>
           </CardHeader>
           <CardContent className="grid gap-3 text-sm leading-6 text-foreground/75">
-            <p>Reliable systems that degrade gracefully.</p>
-            <p>Developer surfaces that reduce operational drag.</p>
-            <p>Interfaces that make complex workflows readable.</p>
+            <p>Systems that solve real problems, not just code</p>
+            <p>Learning by building across domains</p>
+            <p>Simple, scalable, maintainable systems</p>
           </CardContent>
         </Card>
       </div>
@@ -325,8 +343,7 @@ function ContactSection() {
       <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <p className="max-w-2xl text-lg leading-8 text-foreground/80">
-            Have a system to untangle, a product surface to sharpen, or an AI
-            workflow that needs engineering taste? Let’s talk.
+          Have an idea, product, or system you’re building? I’m always open to thoughtful conversations and collaboration.
           </p>
         </div>
         <Button asChild size="lg">

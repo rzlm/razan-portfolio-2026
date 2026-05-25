@@ -10,7 +10,7 @@ const navItems = [
 export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-velvet-edge/80 bg-background/95">
-      <div className="mx-auto grid h-14 w-full max-w-6xl grid-cols-[1fr_auto] items-center px-5 md:grid-cols-[220px_1fr_auto] md:px-8">
+      <div className="mx-auto grid h-14 w-full max-w-4xl grid-cols-[1fr_auto] items-center px-6 md:grid-cols-[220px_1fr_auto] md:px-12">
         <a href="#home" className="font-mono text-xs font-bold text-foreground">
           RM
         </a>
