@@ -44,16 +44,16 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))"
         },
         velvet: {
-          base: "#150f28",
-          low: "#1e1830",
-          panel: "#221c35",
-          raised: "#2c2640",
-          edge: "#3d2f60",
-          text: "#ffe3eb",
-          quiet: "#8a6aa8",
-          pink: "#f67599",
-          gold: "#efc050",
-          lilac: "#dcb8fc"
+          base: "hsl(var(--velvet-base))",
+          low: "hsl(var(--velvet-low))",
+          panel: "hsl(var(--velvet-panel))",
+          raised: "hsl(var(--velvet-raised))",
+          edge: "hsl(var(--velvet-edge))",
+          text: "hsl(var(--velvet-text))",
+          quiet: "hsl(var(--velvet-quiet))",
+          pink: "hsl(var(--velvet-pink))",
+          gold: "hsl(var(--velvet-gold))",
+          lilac: "hsl(var(--velvet-lilac))"
         }
       },
       fontFamily: {
