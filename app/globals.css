@@ -4,6 +4,42 @@
 
 @layer base {
   :root {
+    --background: 335 45% 97%;
+    --foreground: 257 41% 15%;
+    --card: 336 42% 94%;
+    --card-foreground: 257 41% 15%;
+    --popover: 336 42% 94%;
+    --popover-foreground: 257 41% 15%;
+    --primary: 343 86% 57%;
+    --primary-foreground: 337 100% 97%;
+    --secondary: 42 84% 48%;
+    --secondary-foreground: 42 100% 12%;
+    --muted: 337 28% 89%;
+    --muted-foreground: 273 20% 42%;
+    --accent: 274 56% 47%;
+    --accent-foreground: 337 100% 97%;
+    --destructive: 6 100% 84%;
+    --destructive-foreground: 357 100% 21%;
+    --border: 277 22% 76%;
+    --input: 277 22% 76%;
+    --ring: 343 86% 57%;
+    --radius: 0px;
+    --velvet-base: 335 45% 97%;
+    --velvet-low: 336 42% 92%;
+    --velvet-panel: 336 42% 94%;
+    --velvet-raised: 337 35% 88%;
+    --velvet-edge: 277 22% 76%;
+    --velvet-text: 257 41% 15%;
+    --velvet-quiet: 273 20% 42%;
+    --velvet-pink: 343 86% 57%;
+    --velvet-gold: 42 84% 43%;
+    --velvet-lilac: 274 56% 47%;
+    --grid-line: 277 22% 76%;
+    --selection-bg: #f67599;
+    --selection-fg: #221c35;
+  }
+
+  .dark {
     --background: 257 45% 11%;
     --foreground: 337 100% 95%;
     --card: 257 31% 16%;
@@ -23,7 +59,19 @@
     --border: 253 34% 28%;
     --input: 253 34% 28%;
     --ring: 343 86% 71%;
-    --radius: 0px;
+    --velvet-base: 257 45% 11%;
+    --velvet-low: 257 33% 14%;
+    --velvet-panel: 257 31% 16%;
+    --velvet-raised: 254 26% 20%;
+    --velvet-edge: 253 34% 28%;
+    --velvet-text: 337 100% 95%;
+    --velvet-quiet: 274 27% 54%;
+    --velvet-pink: 343 86% 71%;
+    --velvet-gold: 42 84% 63%;
+    --velvet-lilac: 274 83% 85%;
+    --grid-line: 253 34% 28%;
+    --selection-bg: #f67599;
+    --selection-fg: #221c35;
   }
 
   * {
@@ -37,23 +85,45 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01" on, "cv01" on;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
   ::selection {
-    background: #f67599;
-    color: #221c35;
+    background: var(--selection-bg);
+    color: var(--selection-fg);
   }
 }
 
 @layer utilities {
   .technical-grid {
     background-image:
-      linear-gradient(rgba(61, 47, 96, 0.32) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(61, 47, 96, 0.32) 1px, transparent 1px);
+      linear-gradient(hsl(var(--grid-line) / 0.28) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line) / 0.28) 1px, transparent 1px);
     background-size: 64px 64px;
   }
 
   .section-rule {
     @apply border-t border-velvet-edge;
+  }
+}
+
+/* "velvet" command-palette easter egg */
+@keyframes velvet-party {
+  0%,
+  100% {
+    filter: none;
+  }
+  50% {
+    filter: hue-rotate(160deg) saturate(1.6);
+  }
+}
+
+.velvet-party body {
+  animation: velvet-party 1s ease-in-out 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velvet-party body {
+    animation: none;
   }
 }

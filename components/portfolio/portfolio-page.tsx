@@ -1,15 +1,15 @@
 import {
   ArrowUpRight,
   BookOpenText,
-  Braces,
   Code2,
   Database,
   Github,
   Linkedin,
   Mail,
-  Server,
-  TerminalSquare
+  UserRound
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,10 @@ import {
 } from "@/components/ui/card";
 import { SectionHeading } from "@/components/portfolio/section-heading";
 import { SiteHeader } from "@/components/portfolio/site-header";
+import { posts } from "@/lib/writing";
+
+// Drop your photo in /public and set this to its path, e.g. "/profile.jpg".
+const profilePhoto: string | null = "/profile.jpg";
 
 const experience = [
   {
@@ -88,30 +92,6 @@ const projects = [
   // }
 ];
 
-const posts = [
-  {
-    title: "Designing APIs for Calm Operations",
-    date: "May 2026",
-    summary:
-      "Notes on shaping service contracts that are easy to observe, debug, and evolve under production pressure.",
-    tags: ["API Design", "Systems"]
-  },
-  {
-    title: "AI Tools Need Better Failure Modes",
-    date: "April 2026",
-    summary:
-      "A practical look at building AI workflows that keep humans oriented when model output becomes uncertain.",
-    tags: ["AI", "UX"]
-  },
-  {
-    title: "Frontend Architecture as Product Memory",
-    date: "March 2026",
-    summary:
-      "How durable component systems can preserve product decisions and reduce repeated design drift.",
-    tags: ["React", "Architecture"]
-  }
-];
-
 const skills = [
   "TS",
   "Python",
@@ -138,7 +118,7 @@ export function PortfolioPage() {
           <AboutSection />
           <ExperienceSection />
           <ProjectsSection />
-          <BlogSection />
+          <RecentWritingSection />
           <SkillsSection />
           <ContactSection />
           <Footer />
@@ -151,23 +131,27 @@ export function PortfolioPage() {
 function HeroSection() {
   return (
     <section className="grid min-h-[calc(100vh-8rem)] items-center gap-10 pb-24 md:grid-cols-[minmax(220px,0.9fr)_1fr]">
-      {/* <div className="relative order-2 aspect-[4/5] w-full max-w-sm border border-velvet-edge bg-velvet-raised md:order-1">
-        <div className="absolute inset-5 border border-velvet-edge bg-velvet-panel p-4">
-          <div className="flex items-center gap-2 border-b border-velvet-edge pb-3">
-            <span className="h-2 w-2 rounded-full bg-primary" />
-            <span className="h-2 w-2 rounded-full bg-secondary" />
-            <span className="h-2 w-2 rounded-full bg-velvet-lilac" />
-          </div>
-          <div className="mt-5 space-y-3 font-mono text-xs text-muted-foreground">
-            <p className="text-primary">const engineer = &#123;</p>
-            <p className="pl-4">name: &quot;Razan Mohamed&quot;,</p>
-            <p className="pl-4">craft: &quot;software + AI&quot;,</p>
-            <p className="pl-4 text-secondary">mode: &quot;deep focus&quot;</p>
-            <p className="text-primary">&#125;;</p>
-          </div>
-          <div className="absolute inset-x-5 top-16 h-16 animate-scan-line border-y border-primary/50 bg-primary/10" />
+      <div className="relative order-2 aspect-[4/5] w-full max-w-xs border border-velvet-edge bg-velvet-raised md:order-1">
+        <div className="absolute inset-5 overflow-hidden border border-velvet-edge bg-velvet-panel">
+          {profilePhoto ? (
+            <Image
+              src={profilePhoto}
+              alt="Portrait of Razan Mohamed"
+              fill
+              priority
+              sizes="(min-width: 768px) 320px, 100vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full flex-col items-center justify-center gap-3 text-muted-foreground">
+              <UserRound className="h-12 w-12 text-primary" />
+              <p className="font-mono text-xs uppercase tracking-[0.14em]">
+                Photo coming soon
+              </p>
+            </div>
+          )}
         </div>
-      </div> */}
+      </div>
 
       <div className="order-1 max-w-xl animate-fade-up md:order-2">
         <Badge variant="accent" className="mb-5">
@@ -233,7 +217,7 @@ function AboutSection() {
 
 function ExperienceSection() {
   return (
-    <section className="section-rule py-20">
+    <section id="experience" className="section-rule py-20">
       <SectionHeading eyebrow="02" title="Experience" />
       <div className="space-y-4">
         {experience.map((item) => (
@@ -303,7 +287,7 @@ function ProjectsSection() {
 
 function SkillsSection() {
   return (
-    <section className="section-rule py-20">
+    <section id="skills" className="section-rule py-20">
       <SectionHeading eyebrow="05" title="Skills" />
       <div className="grid gap-8 md:grid-cols-[1fr_1fr]">
         <div>
@@ -336,6 +320,45 @@ function SkillsSection() {
   );
 }
 
+function RecentWritingSection() {
+  return (
+    <section id="writing" className="section-rule py-20">
+      <SectionHeading eyebrow="04" title="Recent Writing" />
+      <div className="space-y-4">
+        {posts.slice(0, 3).map((post, index) => (
+          <Link key={post.slug} href={`/writing/${post.slug}`} className="block">
+            <Card
+              className="group grid gap-5 p-5 transition-colors hover:border-primary md:grid-cols-[72px_1fr_auto]"
+            >
+              <div className="flex h-14 w-14 items-center justify-center border border-velvet-edge bg-velvet-low font-mono text-sm text-primary">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+              <div>
+                <div className="mb-3 flex flex-wrap items-center gap-3">
+                  <BookOpenText className="h-4 w-4 text-primary" />
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                    {post.date}
+                  </p>
+                </div>
+                <h3 className="text-xl font-semibold leading-7">{post.title}</h3>
+                <p className="text-sm leading-6 text-foreground/75">{post.summary}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <Badge key={tag} variant="primary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ContactSection() {
   return (
     <section id="contact" className="section-rule py-20">
@@ -357,39 +380,6 @@ function ContactSection() {
   );
 }
 
-function BlogSection() {
-  return (
-    <section id="blog" className="section-rule py-20">
-      <SectionHeading eyebrow="04" title="Blog" />
-      <div className="grid gap-4 md:grid-cols-3">
-        {posts.map((post) => (
-          <Card key={post.title} className="group flex min-h-72 flex-col">
-            <CardHeader>
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <BookOpenText className="h-5 w-5 text-primary" />
-                <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                  {post.date}
-                </p>
-              </div>
-              <CardTitle className="leading-6">{post.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-1 flex-col">
-              <p className="text-sm leading-6 text-foreground/75">{post.summary}</p>
-              <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                {post.tags.map((tag) => (
-                  <Badge key={tag} variant="primary">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer className="section-rule flex flex-col gap-4 py-8 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
@@ -400,8 +390,8 @@ function Footer() {
         <a className="hover:text-primary" href="#work">
           Work
         </a>
-        <a className="hover:text-primary" href="#blog">
-          Blog
+        <a className="hover:text-primary" href="#writing">
+          Recent Writing
         </a>
         <a className="hover:text-primary" href="#contact">
           Contact
